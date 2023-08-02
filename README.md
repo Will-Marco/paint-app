@@ -1,1 +1,1 @@
-I will try to making Paint Application
+I tryed to making Paint Application
