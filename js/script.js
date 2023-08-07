@@ -2,13 +2,16 @@
 const canvas = document.querySelector("canvas"),
   toolBtns = document.querySelectorAll(".tool"),
   fillColor = document.querySelector("#fill-color"),
-  sizeSlider = document.querySelector("#size-slider");
+  sizeSlider = document.querySelector("#size-slider"),
+  colorBtns = document.querySelectorAll(".options .option"),
+  colorPicker = document.querySelector("#color-picker");
 
 // VARIABLES WITH DEFAULT VALUE
 let ctx = canvas.getContext("2d"),
   isDrawing = false,
   brushWidth = 3,
   selectedTool = "brush",
+  selectedColor = "#000",
   prevMouseX,
   prevMouseY,
   snapshot;
@@ -26,6 +29,8 @@ const startDraw = (e) => {
   prevMouseY = e.offsetY;
   ctx.beginPath();
   ctx.lineWidth = brushWidth;
+  ctx.strokeStyle = selectedColor;
+  ctx.fillStyle = selectedColor;
   snapshot = ctx.getImageData(0, 0, canvas.width, canvas.height);
 };
 
@@ -100,6 +105,25 @@ toolBtns.forEach((btn) => {
 
 // CHANGE BRUSH WIDTH
 sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
+
+// SET COLOR TO SHAPES
+colorBtns.forEach((btn) => {
+  btn.addEventListener("click", (e) => {
+    document.querySelector(".options .selected").classList.remove("selected");
+    btn.classList.add("selected");
+    const bgColor = window
+      .getComputedStyle(btn)
+      .getPropertyValue("background-color");
+    selectedColor = bgColor;
+  });
+});
+
+// SET COLOR FROM COLOR PICKER
+
+colorPicker.addEventListener("change", () => {
+  colorPicker.parentElement.style.background = colorPicker.value;
+  colorPicker.parentElement.click();
+});
 
 // STOP DRAWING
 const stopDraw = () => {
