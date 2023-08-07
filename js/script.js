@@ -18,10 +18,18 @@ let ctx = canvas.getContext("2d"),
   prevMouseY,
   snapshot;
 
+// SET CANVAS BACKGROUND
+const setCanvasBackground = () => {
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = selectedColor;
+};
+
 // SET CANVAS WIDTH AND HEIGHT
 window.addEventListener("load", () => {
   canvas.width = canvas.offsetWidth;
   canvas.height = canvas.offsetHeight;
+  setCanvasBackground();
 });
 
 // START DRAWING
@@ -134,6 +142,7 @@ colorPicker.addEventListener("change", () => {
 // CLEAR CANVAS BUTTON
 clearCanvasBtn.addEventListener("click", () => {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  setCanvasBackground();
 });
 
 // SAVE LIKE IMAGE OUR PAINT
