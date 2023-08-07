@@ -1,9 +1,10 @@
 // GLOBAL VARIABLES
 const canvas = document.querySelector("canvas"),
   toolBtns = document.querySelectorAll(".tool"),
-  fillColor = document.querySelector("#fill-color");
+  fillColor = document.querySelector("#fill-color"),
+  sizeSlider = document.querySelector("#size-slider");
 
-// VARIABLES
+// VARIABLES WITH DEFAULT VALUE
 let ctx = canvas.getContext("2d"),
   isDrawing = false,
   brushWidth = 3,
@@ -96,6 +97,9 @@ toolBtns.forEach((btn) => {
     selectedTool = btn.id;
   });
 });
+
+// CHANGE BRUSH WIDTH
+sizeSlider.addEventListener("change", () => (brushWidth = sizeSlider.value));
 
 // STOP DRAWING
 const stopDraw = () => {
