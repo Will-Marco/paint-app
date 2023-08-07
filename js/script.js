@@ -4,7 +4,9 @@ const canvas = document.querySelector("canvas"),
   fillColor = document.querySelector("#fill-color"),
   sizeSlider = document.querySelector("#size-slider"),
   colorBtns = document.querySelectorAll(".options .option"),
-  colorPicker = document.querySelector("#color-picker");
+  colorPicker = document.querySelector("#color-picker"),
+  clearCanvasBtn = document.querySelector(".clear-canvas"),
+  saveImageBtn = document.querySelector(".save-img");
 
 // VARIABLES WITH DEFAULT VALUE
 let ctx = canvas.getContext("2d"),
@@ -127,6 +129,19 @@ colorBtns.forEach((btn) => {
 colorPicker.addEventListener("change", () => {
   colorPicker.parentElement.style.background = colorPicker.value;
   colorPicker.parentElement.click();
+});
+
+// CLEAR CANVAS BUTTON
+clearCanvasBtn.addEventListener("click", () => {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+});
+
+// SAVE LIKE IMAGE OUR PAINT
+saveImageBtn.addEventListener("click", () => {
+  const link = document.createElement("a");
+  link.download = `Paint-${Date.now()}.jpg`;
+  link.href = canvas.toDataURL();
+  link.click();
 });
 
 // STOP DRAWING
